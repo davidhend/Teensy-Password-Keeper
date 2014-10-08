@@ -1,0 +1,237 @@
+From: "Saved by Windows Internet Explorer 10"
+Subject: Rijndael Encryption Algorithm
+Date: Mon, 7 Oct 2013 08:23:08 +0100
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----=_NextPart_000_0000_01CEC336.74606DD0"
+X-MimeOLE: Produced By Microsoft MimeOLE V6.1.7601.17609
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_000_0000_01CEC336.74606DD0
+Content-Type: text/html;
+	charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://www.efgh.com/software/rijndael.htm
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><META content=3D"IE=3D5.0000" =
+http-equiv=3D"X-UA-Compatible">
+<TITLE>Rijndael Encryption Algorithm</TITLE>
+<META content=3D"text/html; charset=3Dwindows-1252" =
+http-equiv=3DContent-Type>
+<META name=3Ddescription content=3D"A C program for Rijndael Encryption =
+Algorithm.">
+<META name=3DGENERATOR content=3D"MSHTML 10.00.9200.16686"></HEAD>
+<BODY>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD><A href=3D"http://www.efgh.com/software/index.html"><IMG =
+alt=3DLOGO=20
+      src=3D"http://www.efgh.com/software/sitelogo.gif" width=3D120 =
+height=3D114></A>=20
+    </TD>
+    <TD>
+      <CENTER>
+      <H1>Rijndael Encryption =
+Algorithm</H1></CENTER></TD></TR></TBODY></TABLE>
+<DL>
+  <DT>Title:=20
+  <DD>Rijndael Encryption Algorithm=20
+  <DT>Language:=20
+  <DD>C=20
+  <DT>Author:=20
+  <DD>Philip J. Erdelsky=20
+  <UL>
+    <LI><A href=3D"mailto:pje@efgh.com">pje@efgh.com</A>=20
+    <LI><A=20
+    =
+href=3D"http://www.alumni.caltech.edu/~pje/">http://www.alumni.caltech.ed=
+u/~pje/</A>=20
+    </LI></UL>
+  <DT>Date:=20
+  <DD>September 3, 2002=20
+  <DT>Usage:=20
+  <DD>Public domain; no restrictions on use=20
+  <DT>Portability:=20
+  <DD>Any C environment, also compiles as C++=20
+  <DT>Keywords:=20
+  <DD>rijndael, cryptography=20
+  <DT>Abstract:=20
+  <DD>A C package for the Rijndael Encryption Algorithm=20
+  <DT>Source code:=20
+  <DD><A =
+href=3D"http://www.efgh.com/software/rijndael.txt">rijndael.txt</A>=20
+</DD></DL>
+<P>The Rijndael encryption algorithm has been designed to replace the =
+aging DES=20
+algorithm. Like DES, it is a block cipher. It uses 128-bit, 192-bit or =
+256-bit=20
+keys. This implementation encrypts 128-bit blocks. (DES used 56-bit keys =
+and=20
+64-bit blocks.)=20
+<P>The code in this package is a modified version of an implementation =
+placed in=20
+the public domain by the following persons:=20
+<UL>
+  <LI>Vincent Rijmen <A=20
+  =
+href=3D"mailto:vincent.rijmen@esat.kuleuven.ac.be">vincent.rijmen@esat.ku=
+leuven.ac.be</A>=20
+
+  <LI>Antoon Bosselaers <A=20
+  =
+href=3D"mailto:antoon.bosselaers@esat.kuleuven.ac.be">antoon.bosselaers@e=
+sat.kuleuven.ac.be</A>=20
+
+  <LI>Paulo Barreto <A=20
+  =
+href=3D"mailto:paulo.barreto@terra.com.br">paulo.barreto@terra.com.br</A>=
+=20
+</LI></UL>
+<P>The original code has been posted as <A=20
+href=3D"http://www.efgh.com/software/rijndael.zip">rijndael.zip</A>.=20
+<P>The modified code is easier to use than the original, and it compiles =
+as=20
+either C or C++.=20
+<P>The modified code resides in the files rijndael.h and rijndael.c, =
+which have=20
+been combined into the single file <A=20
+href=3D"http://www.efgh.com/software/rijndael.txt">rijndael.txt</A>. =
+Download this=20
+file and then use a text editor to separate the two components. Then =
+#include=20
+the file rijndael.h in any module that uses Rijndael encryption, and =
+compile and=20
+link the file rijndael.c to the application.=20
+<P>To perform Rijndael encryption or decryption, first set up a buffer =
+for=20
+encryption or decryption: <PRE>     nrounds =3D rijndaelSetupEncrypt(rk, =
+key, keybits);  for encryption
+     nrounds =3D rijndaelSetupDecrypt(rk, key, keybits);  for decryption
+
+     unsigned long *rk;   pointer to encryption/decryption buffer,
+                          required space:
+                            keybits  32-bit words required
+                            128      44
+                            192      52
+                            256      60
+
+     const unsigned char *key;  key, where length in bytes is:
+                                  keybits  number of bytes
+                                  128      16
+                                  192      24
+                                  256      32
+
+     int keybits;         number of bits in key, must be 128, 192 or
+                          256
+
+     int nrounds;         number of rounds:
+                            keybits  nrounds
+                            128      10
+                            192      12
+                            256      14
+</PRE>
+<P>The package provides three macros to convert the keybits value to =
+closely=20
+related values: <PRE>     KEYLENGTH(keybits) number of bytes in key[] =
+array
+     RKLENGTH(keybits)  number of 32-bit words in rk[] array
+     NROUNDS(keybits)   number of rounds
+</PRE>
+<P>Encryption and decryption are performed, a block at a time, with the=20
+following two functions: <PRE>     rijndaelEncrypt(rk, nrounds, =
+plaintext, ciphertext);
+     rijndaelDecrypt(rk, nrounds, ciphertext, plaintext);
+
+     const unsigned long *rk;
+                          pointer to encryption/decryption buffer which
+                          was filled by rijndaelSetupEncrypt() or
+                          rijndaelSetupDecrypt()
+
+     int nrounds;         number of rounds, as computed by
+                          rijndaelSetupEncrypt(),
+                          rijndaelSetupDecrypt() or NROUNDS
+
+     [const] unsigned char plaintext[16];
+     [const] unsigned char ciphertext[16];
+                          pointers to 16-byte buffers to be encrypted
+                          or decrypted; the source buffer has a const
+                          qualifier
+</PRE>
+<P>To satisfy the truly paranoid user, it is probably advisable to clear =
+and=20
+delete the buffers after the process is finished.=20
+<P>In the file rijndael.c, a preprocessor macro FULL_UNROLL has been =
+defined.=20
+This causes the compiler to generate inline code instead of loops in =
+some=20
+places. This produces faster but larger code. You may want to remove =
+this=20
+definition if you are programming for an environment that needs smaller =
+but=20
+slower code.=20
+<P>The downloaded source code also includes a simple file encryption =
+program and=20
+its corresponding decryption program.=20
+<P>The encryption program is called as follows: <PRE>     encrypt  =
+password  cryptofile
+</PRE>
+<P>It encrypts the standard input (padding it with spaces, if =
+necessary), and=20
+writes the result to the specified cryptofile.=20
+<P>The decryption program is called as follows: <PRE>    decrypt  =
+password  cryptofile
+</PRE>
+<P>It decrypts the cryptofile contents and sends the result (padded with =
+spaces,=20
+if necessary) to the standard output.=20
+<P>These programs should be used only for demonstration purposes, =
+because the=20
+use of a password as a key gives an effective key length much shorter =
+than the=20
+256-bit key passed to the Rijndael encryption package.=20
+<P>The programs also have another shortcoming that some users may object =
+to.=20
+They encrypt and decrypt each 128-bit block separately. If the plaintext =
+
+contains identical 128-byte blocks, as many text files do, the blocks =
+will be=20
+encrypted identically. This makes some of the plaintext structure =
+visible in the=20
+ciphertext, even to someone who does not have the key. The usual =
+practice is to=20
+combine each block after the first with the previous blocks (usually by =
+some=20
+kind of XOR operation) before encrypting it. This hides repeated blocks =
+very=20
+effectively, but it can wreak havoc if even one block of ciphertext is=20
+corrupted. The corrupted block AND ALL SUBSEQUENT BLOCKS will become =
+unreadable.=20
+</P></BODY></HTML>
+
+------=_NextPart_000_0000_01CEC336.74606DD0
+Content-Type: image/gif
+Content-Transfer-Encoding: base64
+Content-Location: http://www.efgh.com/software/sitelogo.gif
+
+R0lGODdheAByAIAAAAAAAP///ywAAAAAeAByAAAC/oSPqcvtD6OctNqL8wu8+w+G4kiW5omWSMq2
+7gurR0zX9h2s+M73n+4LCmPAofEoMyCXzN+sCUUWo9TetIq1XbPc17YLRn3D5NHYZSnDzi0AS6lu
+P2/udz0unmvRd3yyX+OG4WfC9rZG+LfTJ8EBmOgER9fx6JGQA2mmF0hJclmZmbNJA1oYGmKYUqpy
+CpIqRjmB2Wo5SoRIGyu5F7ngOJsrusspMiUY7GiLKxwBnPt6slp7LE0IbaoL4Ux7zZrcWO3X7Ym2
+3Tpulq0djodeXM4e544Kj8y8WAx6jDzvuvyszMs/bgHLCdTQyErBNswoiBoyTMvCQ4ISVuxVIR+P
+/n4/zJmSNBHVqHjRQsIi+SuilY0mo3lkpXIjy5gH4T1CCAilIhz7KN7BeenXopYfbarD2WkozXoM
+QQKdo9MTUZhGvz1NynMqOZ0XrQLFSkdrOq4PvSIVmnVp06oNz75cI/YdWadPf86MKpdtXZB38Q2i
+exVtWLU+0wD+KlgiYVVtwf3cC1YxXnp/H9eNHCgu5QtlG2vATEqzv8pHEYImIrojabOmE2defFIv
+ZNehYSfxvM5y4LdeUqfkLVc3YuBybEtl3eyw28kijWtCnrv0Z9qonacjPvpm69Nwrb/DvQE7qb6T
+wDsQHLR3HeaufCcTb4l6bfnq2U8z6F1jfKX2/mvhz9+eAuRlZdA9r2nTXX+x8OHLNHvFxZETdiTU
+0X49ecOggvTRs5KADHQ2oYbmfejDTccVJ2KBK9mBIhdKpPgYfShFOB5EnegDYiHuoWbViA00pko8
+NNbmFjElAciTGkLuWN2D0x2Zoj0JSgnGkFQ2eaWLTGaZIZdYWOlliGFSAeaYUOahH0RLShESTUiW
+hGaOA54o0hGwwfGmVCrp8MQnWwDBp4ALfpMNoTO82FWg643E6Ht4LipMjo+WhehDTjmaaKaYSqop
+pxF5CKmloQ46aKWVgnipqO955hWl6fUooX+uziprqRedOsykqroK6qZyFhorrpDqauuspna1QOmk
+xOqqbKi52hKoOsbqBuyxnlYbI60NdXbFPHlS2c2rZubx7bjkRmluPuWmuxO7RpTpboBOzktvvfbe
+iy8DBQAAOw==
+
+------=_NextPart_000_0000_01CEC336.74606DD0--
