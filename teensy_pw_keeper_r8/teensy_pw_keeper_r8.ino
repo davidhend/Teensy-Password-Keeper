@@ -90,7 +90,7 @@ char *yes_no_options[] = {
   "No", "Yes"};
 
 char *profile_options[] = {
-  "- Email", "- Bank", "- Pay Pal", "- AT&T", "- Unused", "- Unused", "- Unused", "- Unused", "- Unused", "- Unused"};
+  "- Email", "- Bank", "- 3rd Party Pay", "- Unused", "- Unused", "- Unused", "- Unused", "- Unused", "- Unused", "- Unused"};
 
 char *main_menu_options[] = {
   "- Select Profile","- Display Password","- Generate Password","- Transmit Password"};
